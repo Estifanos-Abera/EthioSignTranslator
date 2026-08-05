@@ -1,0 +1,1 @@
+a simple grid (classes as rows, signers as columns, rep count in each cell). A Google Sheet or even a WhatsApp message table works — just needs to exist.

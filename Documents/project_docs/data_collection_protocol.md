@@ -1,0 +1,1 @@
+recording setup, rep targets, file naming, checklist. Send this to every signer before they record.
