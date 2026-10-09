@@ -118,13 +118,19 @@ def detect(landmarker: mp_vision.HandLandmarker, frame_bgr, timestamp_ms: int):
 def result_to_hand_slots(result) -> tuple[dict | None, dict | None]:
     """Raw, unordered detection output as (hand_1, hand_2). Downstream
     preprocessing remaps by `handedness`, not by slot position -- MediaPipe's
-    slot order is not guaranteed stable across frames."""
+    slot order is not guaranteed stable across frames.
+
+    Handedness is inverted here: MediaPipe reports handedness from the
+    model's mirrored perspective, not the signer's actual anatomy -- verified
+    empirically (right hand shown, "Left" reported) on 2026-08-27. Swapping
+    here means the saved label always matches the signer's true hand."""
     if not result.hand_landmarks:
         return None, None
+    flip_label = {"Left": "Right", "Right": "Left"}
     slots: list[dict] = []
     for landmarks, handedness in zip(result.hand_landmarks, result.handedness):
         slots.append({
-            "handedness": handedness[0].category_name,
+            "handedness": flip_label[handedness[0].category_name],
             "confidence": round(float(handedness[0].score), 4),
             "landmarks": [[lm.x, lm.y, lm.z] for lm in landmarks],
         })
