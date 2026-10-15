@@ -1,0 +1,29 @@
+{
+  "model_architecture": "2-layer GRU (64 -> 32)",
+  "input_shape": [
+    30,
+    252
+  ],
+  "feature_description": "position + velocity, wrist-relative normalised, both hands (zero-padded if one-handed), 30 frames",
+  "num_classes": 15,
+  "class_labels": {
+    "0": "ene",
+    "1": "ante",
+    "2": "felig",
+    "3": "erda",
+    "4": "wided",
+    "5": "selam",
+    "6": "ameseginalehu",
+    "7": "yikirta",
+    "8": "awo",
+    "9": "ay",
+    "10": "ebakih",
+    "11": "mn",
+    "12": "yet",
+    "13": "sm",
+    "14": "wiha"
+  },
+  "source_keras_model": "best_model.h5",
+  "tensorflow_version_used_for_training": "2.20+",
+  "tensorflowjs_version_used_for_conversion": "4.17.0"
+}

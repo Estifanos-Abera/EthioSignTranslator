@@ -133,8 +133,12 @@ def main() -> None:
     with open(MODEL_OUT_DIR / "label_map.json", "w", encoding="utf-8") as f:
         json.dump({label: i for i, label in enumerate(CLASS_LABELS)}, f, indent=2, ensure_ascii=False)
 
+    # Also save in legacy HDF5 format for TF.js conversion compatibility
+    h5_path = MODEL_OUT_DIR / "best_model.h5"
+    model.save(str(h5_path))
+    print(f"Legacy HDF5 model saved to {h5_path}")
     print(f"\nBest model saved to {checkpoint_path}")
-    print(f"Test split + history saved to {MODEL_OUT_DIR} (for evaluate.py)")
+ 
 
 
 if __name__ == "__main__":

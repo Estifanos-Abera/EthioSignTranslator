@@ -19,3 +19,5 @@ venv/
 node_modules/
 .next/
 .DS_Store
+.venv-convert
+.venv-convert-311
