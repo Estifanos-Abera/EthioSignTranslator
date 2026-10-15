@@ -1,23 +1,24 @@
-# Python
+# Python environment & cache
 __pycache__/
-*.pyc
-*.pyo
-*.pyd
-
-# Virtual enviroment
+*.py[cod]
+*$py.class
 .venv/
-*.csv
-
-#OS files
-.DS_Store
-Thumbs.db
-
-__pycache__/
-*.pyc
 venv/
-.venv/
+.venv-convert/
+.venv-convert-311/
+
+# Heavy datasets and local binaries (The culprits)
+data/
+*.npy
+*.h5
+*.keras
+
+# Web UI dependencies & build outputs
 node_modules/
 .next/
+dist/
+build/
+
+# OS and system files
 .DS_Store
-.venv-convert
-.venv-convert-311
+Thumbs.db
