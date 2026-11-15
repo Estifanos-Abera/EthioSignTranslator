@@ -10,18 +10,18 @@ export default function Footer() {
         <svg width="100%" height="28" style={{ display: "block" }}>
           <defs>
             <pattern id="tilet-t4" x="0" y="0" width="28" height="28" patternUnits="userSpaceOnUse">
-              <rect width="28" height="28" fill="none"/>
+              <rect width="28" height="28" fill="none" />
               <g transform="translate(14,14)">
                 <rect x="-11" y="-11" width="22" height="22"
                   transform="rotate(45)"
-                  fill="none" stroke="#E5A93C" strokeWidth="1" opacity="0.22"/>
+                  fill="none" stroke="#E5A93C" strokeWidth="1" opacity="0.22" />
                 <rect x="-5" y="-5" width="10" height="10"
                   transform="rotate(45)"
-                  fill="none" stroke="#E5A93C" strokeWidth="1" opacity="0.22"/>
+                  fill="none" stroke="#E5A93C" strokeWidth="1" opacity="0.22" />
               </g>
             </pattern>
           </defs>
-          <rect width="100%" height="28" fill="url(#tilet-t4)"/>
+          <rect width="100%" height="28" fill="url(#tilet-t4)" />
         </svg>
       </div>
       <div style={{
@@ -69,8 +69,8 @@ export default function Footer() {
             marginBottom: 16,
           }}>Product</p>
           {[
-            { href: "/translate",  label: "Translate" },
-            { href: "/practice",   label: "Practice" },
+            { href: "/translate", label: "Translate" },
+            { href: "/practice", label: "Practice" },
             { href: "/contribute", label: "Contribute" },
           ].map(({ href, label }) => (
             <Link key={href} href={href} style={{
@@ -94,8 +94,8 @@ export default function Footer() {
             marginBottom: 16,
           }}>Project</p>
           {[
-            { href: "/about",    label: "About" },
-            { href: "/docs",     label: "Docs" },
+            { href: "/about", label: "About" },
+            { href: "/docs", label: "Docs" },
             { href: "/research", label: "Research" },
             { href: "/about#contact", label: "Contact" },
           ].map(({ href, label }) => (
@@ -120,7 +120,7 @@ export default function Footer() {
             marginBottom: 16,
           }}>Legal</p>
           {[
-            { href: "/privacy",      label: "Privacy Policy" },
+            { href: "/privacy", label: "Privacy Policy" },
             { href: "/accessibility", label: "Accessibility" },
           ].map(({ href, label }) => (
             <Link key={href} href={href} style={{

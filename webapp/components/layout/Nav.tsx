@@ -4,12 +4,12 @@ import { usePathname } from "next/navigation";
 import { useState } from "react";
 
 const TABS = [
-  { href: "/translate",  label: "Translate" },
-  { href: "/practice",   label: "Practice" },
+  { href: "/translate", label: "Translate" },
+  { href: "/practice", label: "Practice" },
   { href: "/contribute", label: "Contribute" },
-  { href: "/docs",       label: "Docs" },
-  { href: "/about",      label: "About" },
-  { href: "/research",   label: "Research" },
+  { href: "/docs", label: "Docs" },
+  { href: "/about", label: "About" },
+  { href: "/research", label: "Research" },
 ];
 
 export default function Nav() {
@@ -89,13 +89,13 @@ export default function Nav() {
           <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
             {open ? (
               <>
-                <line x1="4" y1="4" x2="18" y2="18" stroke="#1E2229" strokeWidth="1.8" strokeLinecap="round"/>
-                <line x1="18" y1="4" x2="4" y2="18" stroke="#1E2229" strokeWidth="1.8" strokeLinecap="round"/>
+                <line x1="4" y1="4" x2="18" y2="18" stroke="#1E2229" strokeWidth="1.8" strokeLinecap="round" />
+                <line x1="18" y1="4" x2="4" y2="18" stroke="#1E2229" strokeWidth="1.8" strokeLinecap="round" />
               </>
             ) : (
               <>
-                <line x1="3" y1="7" x2="19" y2="7" stroke="#1E2229" strokeWidth="1.8" strokeLinecap="round"/>
-                <line x1="3" y1="13" x2="19" y2="13" stroke="#1E2229" strokeWidth="1.8" strokeLinecap="round"/>
+                <line x1="3" y1="7" x2="19" y2="7" stroke="#1E2229" strokeWidth="1.8" strokeLinecap="round" />
+                <line x1="3" y1="13" x2="19" y2="13" stroke="#1E2229" strokeWidth="1.8" strokeLinecap="round" />
               </>
             )}
           </svg>
