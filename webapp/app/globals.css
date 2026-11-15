@@ -1,0 +1,304 @@
+@import "tailwindcss";
+
+@import "tailwindcss";
+
+/* --- PASTE THE RAW FONTS DIRECTLY HERE --- */
+@font-face {
+  font-family: 'EB Garamond';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url(https://gstatic.com) format('truetype');
+}
+@font-face {
+  font-family: 'EB Garamond';
+  font-style: italic;
+  font-weight: 500;
+  font-display: swap;
+  src: url(https://gstatic.com) format('truetype');
+}
+@font-face {
+  font-family: 'EB Garamond';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(https://gstatic.com) format('truetype');
+}
+@font-face {
+  font-family: 'EB Garamond';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url(https://gstatic.com) format('truetype');
+}
+@font-face {
+  font-family: 'EB Garamond';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url(https://gstatic.com) format('truetype');
+}
+@font-face {
+  font-family: 'EB Garamond';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(https://gstatic.com) format('truetype');
+}
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src: url(https://gstatic.com) format('truetype');
+}
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(https://gstatic.com) format('truetype');
+}
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url(https://gstatic.com) format('truetype');
+}
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url(https://gstatic.com) format('truetype');
+}
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(https://gstatic.com) format('truetype');
+}
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url(https://gstatic.com) format('truetype');
+}
+@font-face {
+  font-family: 'Noto Sans Ethiopic';
+  font-style: normal;
+  font-weight: 300;
+  font-stretch: normal;
+  font-display: swap;
+  src: url(https://gstatic.com) format('truetype');
+}
+@font-face {
+  font-family: 'Noto Sans Ethiopic';
+  font-style: normal;
+  font-weight: 400;
+  font-stretch: normal;
+  font-display: swap;
+  src: url(https://gstatic.com) format('truetype');
+}
+@font-face {
+  font-family: 'Noto Sans Ethiopic';
+  font-style: normal;
+  font-weight: 500;
+  font-stretch: normal;
+  font-display: swap;
+  src: url(https://gstatic.com) format('truetype');
+}
+@font-face {
+  font-family: 'Noto Sans Ethiopic';
+  font-style: normal;
+  font-weight: 600;
+  font-stretch: normal;
+  font-display: swap;
+  src: url(https://gstatic.com) format('truetype');
+}
+@font-face {
+  font-family: 'Noto Sans Ethiopic';
+  font-style: normal;
+  font-weight: 700;
+  font-stretch: normal;
+  font-display: swap;
+  src: url(https://gstatic.com) format('truetype');
+}
+@font-face {
+  font-family: 'Noto Sans Ethiopic';
+  font-style: normal;
+  font-weight: 800;
+  font-stretch: normal;
+  font-display: swap;
+  src: url(https://gstatic.com) format('truetype');
+}
+@font-face {
+  font-family: 'Noto Sans Ethiopic';
+  font-style: normal;
+  font-weight: 900;
+  font-stretch: normal;
+  font-display: swap;
+  src: url(https://gstatic.com) format('truetype');}
+
+
+:root {
+  --cream:        #F2EDE4;
+  --cream-warm:   #EDE6D9;
+  --cream-deep:   #E0D5C5;
+  --night:        #1E2229;
+  --night-deep:   #141820;
+  --night-mid:    #252B34;
+  --clay:         #B33925;
+  --clay-light:   #C94F38;
+  --adey:         #E5A93C;
+  --adey-light:   #F4B942;
+  --taupe:        #6B5E52;
+  --taupe-light:  #8C7E72;
+  --divider:      #D4C4B0;
+  --eucalyptus:   #3D7A5C;
+  --ochre:        #C07A1A;
+
+  --font-serif:    "EB Garamond", Georgia, serif;
+  --font-sans:     "Inter", system-ui, sans-serif;
+  --font-ethiopic: "Noto Sans Ethiopic", sans-serif;
+  --font-mono:     "JetBrains Mono", monospace;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--cream);
+  color: var(--night);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+/* Ethiopic text */
+.eth { font-family: var(--font-ethiopic); }
+
+/* Serif display */
+.serif { font-family: var(--font-serif); }
+
+/* Tilet border — traditional woven pattern as SVG bg */
+.tilet-divider {
+  height: 1px;
+  background: repeating-linear-gradient(
+    90deg,
+    transparent,
+    transparent 6px,
+    var(--divider) 6px,
+    var(--divider) 8px,
+    transparent 8px,
+    transparent 16px,
+    var(--clay) 16px,
+    var(--clay) 17px,
+    transparent 17px,
+    transparent 24px
+  );
+  opacity: 0.35;
+}
+
+.tilet-divider-dark {
+  height: 1px;
+  background: repeating-linear-gradient(
+    90deg,
+    transparent,
+    transparent 6px,
+    rgba(242,237,228,0.15) 6px,
+    rgba(242,237,228,0.15) 8px,
+    transparent 8px,
+    transparent 16px,
+    rgba(229,169,60,0.4) 16px,
+    rgba(229,169,60,0.4) 17px,
+    transparent 17px,
+    transparent 24px
+  );
+}
+
+/* Amharic inline badge */
+.amh-badge {
+  display: inline-block;
+  font-family: var(--font-ethiopic);
+  font-weight: 700;
+  background: var(--adey);
+  color: var(--night-deep);
+  padding: 0.05em 0.35em 0.1em;
+  border-radius: 4px;
+  line-height: 1;
+  vertical-align: baseline;
+  position: relative;
+  top: -0.05em;
+}
+
+/* Flip card */
+.flip-card { perspective: 1000px; display: inline-block; cursor: default; }
+.flip-card-inner {
+  position: relative;
+  display: inline-block;
+  transition: transform 0.55s cubic-bezier(0.4, 0, 0.2, 1);
+  transform-style: preserve-3d;
+}
+.flip-card:hover .flip-card-inner { transform: rotateY(180deg); }
+.flip-front, .flip-back {
+  display: inline-block;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+.flip-back {
+  position: absolute;
+  inset: 0;
+  transform: rotateY(180deg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Skeleton glow nodes */
+.skeleton-node { filter: drop-shadow(0 0 6px var(--adey)); }
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: var(--cream-warm); }
+::-webkit-scrollbar-thumb { background: var(--divider); border-radius: 3px; }
+
+/* Selection */
+::selection { background: rgba(229,169,60,0.25); color: var(--night); }
+
+/* Focus */
+:focus-visible { outline: 2px solid var(--clay); outline-offset: 3px; }
+
+/* Animations */
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(28px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@keyframes skeleton-pulse {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.5; }
+}
+@keyframes tilet-scroll {
+  from { background-position: 0 0; }
+  to   { background-position: 48px 0; }
+}
+
+.anim-fade-up  { animation: fade-up  0.7s cubic-bezier(0.4,0,0.2,1) both; }
+.anim-fade-in  { animation: fade-in  0.5s ease both; }
+.anim-delay-1  { animation-delay: 0.1s; }
+.anim-delay-2  { animation-delay: 0.22s; }
+.anim-delay-3  { animation-delay: 0.38s; }
+.anim-delay-4  { animation-delay: 0.55s; }
+
+@keyframes pageEnter {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}

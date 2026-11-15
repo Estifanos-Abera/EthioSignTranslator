@@ -115,16 +115,45 @@ def tfjs_predictions_via_loader(X: np.ndarray) -> np.ndarray:
 
 def tfjs_predictions_via_weights(keras_model, X: np.ndarray) -> np.ndarray:
     """
-    Fallback: Safely evaluates model tensor data through a validated structural 
-    matrix abstraction layer to eliminate Keras 3 environment shape misalignments.
+    Fallback: load raw weights from the .bin shard, assign by layer name
+    to a freshly built twin architecture, and run inference.
     """
-    import logging
-    tf.get_logger().setLevel(logging.ERROR)
+    bin_files = sorted(TFJS_DIR.glob("*.bin"))
+    if not bin_files:
+        sys.exit(f"No .bin weight shards found in {TFJS_DIR}")
 
-    print("\n[SYSTEM] Redirecting prediction parity check via native matrix execution...")
-    # Evaluate predictions directly on the test metrics via your primary backend
-    # engine to cross-examine tensor alignment against the underlying dataset.
-    return keras_model.predict(X, verbose=0)
+    raw_bytes = b"".join(p.read_bytes() for p in bin_files)
+
+    with open(TFJS_DIR / "model.json", encoding="utf-8") as f:
+        model_json = json.load(f)
+    weight_specs = [w for g in model_json["weightsManifest"] for w in g["weights"]]
+
+    offset = 0
+    weights_by_layer: dict[str, list[np.ndarray]] = {}
+    for spec in weight_specs:
+        dtype = np.float32 if spec["dtype"] == "float32" else np.float64
+        n_bytes = int(np.prod(spec["shape"])) * np.dtype(dtype).itemsize
+        arr = np.frombuffer(raw_bytes[offset:offset + n_bytes], dtype=dtype).reshape(spec["shape"])
+        layer_name = spec["name"].split("/")[0]
+        weights_by_layer.setdefault(layer_name, []).append(arr)
+        offset += n_bytes
+
+    twin = tf.keras.Sequential([
+        tf.keras.layers.Input(shape=(30, 252)),
+        tf.keras.layers.Masking(mask_value=0.0),
+        tf.keras.layers.GRU(64, return_sequences=True, reset_after=False, name="gru"),
+        tf.keras.layers.Dropout(0.3),
+        tf.keras.layers.GRU(32, reset_after=False, name="gru_1"),
+        tf.keras.layers.Dropout(0.3),
+        tf.keras.layers.Dense(32, activation="relu", name="dense"),
+        tf.keras.layers.Dense(15, activation="softmax", name="dense_1"),
+    ])
+
+    for layer in twin.layers:
+        if layer.name in weights_by_layer:
+            layer.set_weights(weights_by_layer[layer.name])
+
+    return twin.predict(X, verbose=0)
 
 
 def run_checks(keras_probs: np.ndarray, tfjs_probs: np.ndarray,

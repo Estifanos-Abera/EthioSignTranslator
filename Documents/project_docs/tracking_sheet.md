@@ -8,11 +8,11 @@ If you'd rather track this in a live spreadsheet (Google Sheets/Excel) instead o
  
 | ID | Name |
 |---|---|
-| s1 | *(assign)* |
-| s2 | *(assign)* |
+| s1 | *(Estifanos)* |
+| s2 | *(Natanim)* |
 | s3 | *(assign)* |
 | s4 | *(assign)* |
-| s5 | *(assign — remote)* |
+| s5 | *(assign )* |
  
 ## Progress Grid
  

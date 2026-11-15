@@ -1,0 +1,17 @@
+export const CLASS_LIST = [
+  { label: "ene",           amharic: "እኔ",       gloss: "I / me",       twoHanded: false },
+  { label: "ante",          amharic: "አንተ",      gloss: "you",          twoHanded: false },
+  { label: "felig",         amharic: "ፈልግ",      gloss: "want",         twoHanded: true  },
+  { label: "erda",          amharic: "እርዳ",      gloss: "help",         twoHanded: true  },
+  { label: "wided",         amharic: "ውደድ",      gloss: "like",         twoHanded: true  },
+  { label: "selam",         amharic: "ሰላም",      gloss: "hello",        twoHanded: false },
+  { label: "ameseginalehu", amharic: "አመሰግናለሁ",  gloss: "thank you",    twoHanded: false },
+  { label: "yikirta",       amharic: "ይቅርታ",     gloss: "sorry",        twoHanded: false },
+  { label: "awo",           amharic: "አዎ",       gloss: "yes",          twoHanded: false },
+  { label: "ay",            amharic: "አይ",       gloss: "no",           twoHanded: false },
+  { label: "ebakih",        amharic: "እባክህ",     gloss: "please",       twoHanded: false },
+  { label: "mn",            amharic: "ምን",       gloss: "what",         twoHanded: false },
+  { label: "yet",           amharic: "የት",       gloss: "where",        twoHanded: false },
+  { label: "sm",            amharic: "ስም",       gloss: "name",         twoHanded: true  },
+  { label: "wiha",          amharic: "ውሃ",       gloss: "water",        twoHanded: false },
+];

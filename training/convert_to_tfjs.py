@@ -96,62 +96,33 @@ def convert() -> None:
     print(f"Loading and patching {KERAS_MODEL_PATH.name} for compatibility...")
     
     # --- SMART PATCH: Convert Keras 3 .keras zip config to Keras 2 format ---
-    patched_model_path = MODEL_DIR / "patched_model.keras"
-    
-    try:
-        # A .keras file is secretly a zip archive containing a config.json file
-        with zipfile.ZipFile(str(KERAS_MODEL_PATH), 'r') as z_in:
-            with zipfile.ZipFile(str(patched_model_path), 'w') as z_out:
-                for item in z_in.infolist():
-                    data = z_in.read(item.filename)
-                    if item.filename == "config.json":
-                        config = json.loads(data.decode('utf-8'))
-                        
-                        # Recursively find and fix InputLayer properties down the tree
-                        def patch_layers(cfg):
-                            if isinstance(cfg, dict):
-                                if cfg.get('class_name') == 'InputLayer' and 'config' in cfg:
-                                    # Keras 2 expects 'batch_input_shape' instead of 'batch_shape'
-                                    if 'batch_shape' in cfg['config']:
-                                        cfg['config']['batch_input_shape'] = cfg['config'].pop('batch_shape')
-                                    # Keras 2 does not use the 'optional' key
-                                    cfg['config'].pop('optional', None)
-                                for k, v in cfg.items():
-                                    patch_layers(v)
-                            elif isinstance(cfg, list):
-                                for item in cfg:
-                                    patch_layers(item)
-                        
-                        patch_layers(config)
-                        data = json.dumps(config).encode('utf-8')
-                    
-                    z_out.writestr(item, data)
-        
-        # Load the newly patched legacy-compatible model copy
-        model = tf.keras.models.load_model(str(patched_model_path))
-    except Exception as e:
-        print(f"Direct patching failed ({e}). Falling back to layout reconstruction...")
-        # Fallback alternative: Rebuild bare functional model structure
-        model = tf.keras.Sequential([
-            tf.keras.layers.Input(shape=(30, 252), name="input_layer"),
-            tf.keras.layers.GRU(64, return_sequences=True),
-            tf.keras.layers.GRU(32),
-            tf.keras.layers.Dense(len(json.load(open(LABEL_MAP_PATH))), activation='softmax')
-        ])
-        # Load the weights out of your file directly if weights are present
-        try:
-            model.load_weights(str(KERAS_MODEL_PATH))
-        except Exception:
-            pass
+    import numpy as np
+    w = np.load(MODEL_DIR / "weights.npz")
+    weights = [w[f"arr_{i}"] for i in range(len(w.files))]
 
+    model = tf.keras.Sequential([
+        tf.keras.layers.Input(shape=(30, 252)),
+        tf.keras.layers.Masking(mask_value=0.0),
+        tf.keras.layers.GRU(64, return_sequences=True, reset_after=False),
+        tf.keras.layers.Dropout(0.3),
+        tf.keras.layers.GRU(32, reset_after=False),
+        tf.keras.layers.Dropout(0.3),
+        tf.keras.layers.Dense(32, activation="relu"),
+        tf.keras.layers.Dense(15, activation="softmax"),
+    ])
+    model.set_weights(weights)
+
+    ref_in = np.load(MODEL_DIR / "X_test.npy")[:20]
+    ref_out = np.load(MODEL_DIR / "ref_probs.npy")
+    got = model.predict(ref_in, verbose=0)
+    assert np.allclose(ref_out, got, atol=1e-4), "weights did not transfer"
+    print("Weight transfer verified, max diff", float(np.abs(ref_out - got).max()))
     model.summary()
+
 
     print(f"\nConverting to TF.js format -> {TFJS_OUT_DIR}")
     tfjs.converters.save_keras_model(model, str(TFJS_OUT_DIR))
 
-    # Clean up the temporary patched file
-    if patched_model_path.exists():
-        patched_model_path.unlink()
 
     # Copy label_map.json into the model directory so the web app
     # can load class names alongside the model weights.

@@ -66,9 +66,9 @@ def build_model() -> tf.keras.Model:
     model = tf.keras.Sequential([
         tf.keras.layers.Input(shape=(SEQ_LEN, NUM_FEATURES)),
         tf.keras.layers.Masking(mask_value=0.0),
-        tf.keras.layers.GRU(64, return_sequences=True),
+        tf.keras.layers.GRU(64, return_sequences=True, reset_after=False),
         tf.keras.layers.Dropout(0.3),
-        tf.keras.layers.GRU(32),
+        tf.keras.layers.GRU(32, reset_after=False),
         tf.keras.layers.Dropout(0.3),
         tf.keras.layers.Dense(32, activation="relu"),
         tf.keras.layers.Dense(NUM_CLASSES, activation="softmax"),
@@ -132,7 +132,9 @@ def main() -> None:
         json.dump({k: [float(v) for v in vals] for k, vals in history.history.items()}, f, indent=2)
     with open(MODEL_OUT_DIR / "label_map.json", "w", encoding="utf-8") as f:
         json.dump({label: i for i, label in enumerate(CLASS_LABELS)}, f, indent=2, ensure_ascii=False)
-
+    np.savez(MODEL_OUT_DIR / "weights.npz", *model.get_weights())
+    np.save(MODEL_OUT_DIR / "ref_probs.npy", model.predict(X_test[:20], verbose=0))
+    
     # Also save in legacy HDF5 format for TF.js conversion compatibility
     h5_path = MODEL_OUT_DIR / "best_model.h5"
     model.save(str(h5_path))
