@@ -35,18 +35,7 @@ export default function Nav() {
       >
         {/* Wordmark */}
         <Link href="/" style={{ textDecoration: "none", display: "flex", alignItems: "center", gap: 10 }}>
-          {/* Placeholder logo — Ethiopic letterform */}
-          <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
-            <rect width="32" height="32" rx="6" fill="#B33925"/>
-            <text
-              x="16" y="23"
-              textAnchor="middle"
-              fontFamily="Noto Sans Ethiopic, sans-serif"
-              fontSize="18"
-              fontWeight="700"
-              fill="#E5A93C"
-            >ኢ</text>
-          </svg>
+          <img src="/brand/logo-mark.svg" width="32" height="32" alt="" />
           <span style={{
             fontFamily: "EB Garamond, serif",
             fontSize: 18,

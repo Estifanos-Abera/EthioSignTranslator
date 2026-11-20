@@ -4,10 +4,23 @@ import Nav from "@/components/layout/Nav";
 import Footer from "@/components/layout/Footer";
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://vercel.app"),
   title: "EthioSignTranslate — Ethiopian Sign Language Recognition",
   description: "Real-time Ethiopian Sign Language recognition. Sign a word, see it in text, hear it spoken aloud. Open source, built in Ethiopia.",
   keywords: ["Ethiopian Sign Language", "EthSL", "sign language", "accessibility", "Amharic", "AI", "Ethiopia"],
+  openGraph: {
+    title: "EthioSignTranslate — Ethiopian Sign Language Recognition",
+    description: "Real-time Ethiopian Sign Language recognition. Sign a word, see it in text, hear it spoken aloud. Open source, built in Ethiopia.",
+    url: "https://vercel.app",
+    siteName: "EthioSignTranslate",
+    type: "website",
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
 };
+
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (

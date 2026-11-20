@@ -35,12 +35,7 @@ export default function Footer() {
         {/* Brand */}
         <div>
           <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 16 }}>
-            <svg width="28" height="28" viewBox="0 0 32 32" fill="none">
-              <rect width="32" height="32" rx="6" fill="#B33925"/>
-              <text x="16" y="23" textAnchor="middle"
-                fontFamily="Noto Sans Ethiopic, sans-serif"
-                fontSize="18" fontWeight="700" fill="#E5A93C">ኢ</text>
-            </svg>
+            <img src="/brand/logo-mark.svg" width="28" height="28" alt="" />
             <span style={{
               fontFamily: "var(--font-serif)",
               fontSize: 16,
